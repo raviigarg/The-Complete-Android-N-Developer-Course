@@ -13,14 +13,28 @@ import java.util.Random;
 public class MainActivity extends AppCompatActivity {
 
     Button startButton;
-    ArrayList<Integer> answers;
+    ArrayList<Integer> answers = new ArrayList<Integer>();
     int locatinOfCorrectAnswer;
 
 
     public void start(View view) {
 
         startButton.setVisibility(View.INVISIBLE);
+
+
+    }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        startButton = (Button) findViewById(R.id.startButton);
         TextView sumTextView = (TextView) findViewById(R.id.sumTextView);
+        Button button0 = (Button) findViewById(R.id.button0);
+        Button button1= (Button) findViewById(R.id.button1);
+        Button button2 = (Button) findViewById(R.id.button2);
+        Button button3 = (Button) findViewById(R.id.button3);
 
         Random rand = new Random();
 
@@ -31,6 +45,8 @@ public class MainActivity extends AppCompatActivity {
 
         locatinOfCorrectAnswer = rand.nextInt(4);
 
+        int incorrectAnswer;
+
         for(int i=0;i <4; i++) {
 
             if(i==locatinOfCorrectAnswer) {
@@ -38,19 +54,22 @@ public class MainActivity extends AppCompatActivity {
                 answers.add(a + b);
 
             }else {
-                answers.add(rand.nextInt(41));
+
+                incorrectAnswer = rand.nextInt(41);
+                while(incorrectAnswer == a +  b) {
+                    incorrectAnswer = rand.nextInt(41);
+                }
+                answers.add(incorrectAnswer);
+
             }
 
         }
+        button0.setText(Integer.toString(answers.get(0)));
+        button1.setText(Integer.toString(answers.get(1)));
+        button2.setText(Integer.toString(answers.get(2)));
+        button3.setText(Integer.toString(answers.get(3)));
 
-    }
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-
-        startButton = (Button) findViewById(R.id.startButton);
 
     }
 }
