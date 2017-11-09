@@ -51,7 +51,8 @@
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
             app:rowCount="2"
-            app:columnCount="2">
+            app:columnCount="2"
+            android:id="@+id/gridLayout">
 
             <Button
                 android:text="3"
