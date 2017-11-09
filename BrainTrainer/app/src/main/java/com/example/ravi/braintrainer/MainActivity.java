@@ -1,5 +1,6 @@
 package com.example.ravi.braintrainer;
 
+import android.os.CountDownTimer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.ActivityChooserView;
@@ -20,6 +21,7 @@ public class MainActivity extends AppCompatActivity {
     Button button2;
     Button button3;
     TextView sumTextView;
+    TextView timerTextView;
     ArrayList<Integer> answers = new ArrayList<Integer>();
     int locatinOfCorrectAnswer;
     int score=0;
@@ -103,8 +105,28 @@ public class MainActivity extends AppCompatActivity {
         button3 = (Button) findViewById(R.id.button3);
         resultTextView = (TextView) findViewById(R.id.resultTextView);
         pointsTextView = (TextView) findViewById(R.id.pointsTextView);
+        timerTextView = (TextView) findViewById(R.id.timerTextView);
 
             generateQuestion();
+
+        new CountDownTimer(3100, 1000) {
+
+
+            @Override
+            public void onTick(long millisUntilFinished) {
+
+
+                timerTextView.setText(String.valueOf(millisUntilFinished / 1000)+ "s");
+
+            }
+
+            @Override
+            public void onFinish() {
+
+                timerTextView.setText("0s");
+                resultTextView.setText("Your score: "+Integer.toString(score)+ "/" + Integer.toString(numberOfQuestions));
+            }
+        }.start();
 
 
     }
